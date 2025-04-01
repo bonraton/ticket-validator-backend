@@ -1,0 +1,43 @@
+{
+  "collectionName": "tickets",
+  "info": {
+    "singularName": "ticket",
+    "pluralName": "tickets",
+    "displayName": "Ticket",
+    "description": "Event ticket assigned to an attendee"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "ticket_id": {
+      "type": "uid",
+      "targetField": "attendee_name",
+      "required": true
+    },
+    "attendee_name": {
+      "type": "string",
+      "required": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["unused", "scanned"],
+      "default": "unused",
+      "required": true
+    },
+    "scanned_at": {
+      "type": "datetime"
+    },
+    "event": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::event.event",
+      "inversedBy": "tickets"
+    },
+    "scanner_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}
